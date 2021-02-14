@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link as ReachLink } from 'next/link'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { Link, Button, useColorMode } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
@@ -15,9 +15,11 @@ const Header: React.FC = () => {
         {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
       </Button>
 
-      <Link data-active={isActive('/')} fontSize="lg" fontWeight="bold" as={ReachLink} to="/">
-        Feed
-      </Link>
+      <NextLink href="/" passHref>
+        <Link data-active={isActive('/')} fontSize="lg" fontWeight="bold">
+          Feed
+        </Link>
+      </NextLink>
     </div>
   )
 
