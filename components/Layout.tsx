@@ -9,7 +9,7 @@ type Props = {
 const Layout: React.FC<Props> = (props) => (
   <div>
     <Header />
-    <Flex direction="column" align="center" maxW={{ xl: '1200px' }} m="0 auto">
+    <Flex direction="column" maxW={{ xl: '1200px' }} m="4">
       {props.children}
     </Flex>
   </div>

@@ -1,9 +1,8 @@
 import React from 'react'
 import Router from 'next/router'
 import ReactMarkdown from 'react-markdown'
-import { Text } from '@chakra-ui/react'
+import { Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import { Link } from '@chakra-ui/react'
 
 export type PostProps = {
   id: number
@@ -27,12 +26,12 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
       <Text mb={4} fontSize="sm">
         {authorName}
       </Text>
-      <ReactMarkdown source={post.content} />
+      <Text mb={4} fontSize="sm">
+        <ReactMarkdown source={post.content.slice(0, 200) + '...'} />
+      </Text>
 
-      <NextLink href="/p/[id]" as={'/p/' + post.id} passHref>
-        <Link fontSize="lg" fontWeight="bold">
-          Read full post
-        </Link>
+      <NextLink fontSize="sm" href="/p/[id]" as={'/p/' + post.id} passHref>
+        <Link fontWeight="bold">Read full post</Link>
       </NextLink>
     </div>
   )
