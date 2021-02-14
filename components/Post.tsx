@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
 import { Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
@@ -26,7 +25,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
         {authorName}
       </Text>
       <Text mb={4} fontSize="sm">
-        <ReactMarkdown source={post.content.slice(0, 200) + '...'} />
+        {post.content.slice(0, 200) + '...'}
       </Text>
 
       <NextLink href="/p/[id]" as={'/p/' + post.id} passHref>
