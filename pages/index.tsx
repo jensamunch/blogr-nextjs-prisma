@@ -24,23 +24,22 @@ type Props = {
 const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
-      <Heading>Public Feed</Heading>
-      <Wrap>
-        <WrapItem>
-          {props.feed.map((post) => (
-            <Box
-              key={post.id}
-              m={2}
-              p={4}
-              width="50%"
-              borderRadius="lg"
-              border="2px"
-              borderColor="gray.200"
-            >
-              <Post post={post} />
-            </Box>
-          ))}
-        </WrapItem>
+      <Box>
+        <Heading pb="4">Public Feed</Heading>
+      </Box>
+      <Wrap spacing="20px">
+        {props.feed.map((post) => (
+          <WrapItem
+            key={post.id}
+            width="500px"
+            p="4"
+            borderRadius="lg"
+            border="2px"
+            borderColor="gray.200"
+          >
+            <Post post={post} />
+          </WrapItem>
+        ))}
       </Wrap>
     </Layout>
   )

@@ -1,5 +1,4 @@
 import React from 'react'
-import Router from 'next/router'
 import ReactMarkdown from 'react-markdown'
 import { Link, Text } from '@chakra-ui/react'
 import NextLink from 'next/link'
@@ -19,7 +18,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : 'Unknown author'
   return (
     // THINK I CAN REPLACE THIS WITH NEXTLINK
-    <div onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
+    <div>
       <Text fontSize="lg" fontWeight="bold">
         {post.title}
       </Text>
@@ -30,7 +29,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
         <ReactMarkdown source={post.content.slice(0, 200) + '...'} />
       </Text>
 
-      <NextLink fontSize="sm" href="/p/[id]" as={'/p/' + post.id} passHref>
+      <NextLink href="/p/[id]" as={'/p/' + post.id} passHref>
         <Link fontWeight="bold">Read full post</Link>
       </NextLink>
     </div>
