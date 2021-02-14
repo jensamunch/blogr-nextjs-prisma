@@ -21,12 +21,6 @@ const Header: React.FC = () => {
         </Link>
       </NextLink>
 
-      <NextLink href="/drafts" passHref>
-        <Link mr="10" data-active={isActive('/drafts')} fontWeight="bold">
-          My Drafts
-        </Link>
-      </NextLink>
-
       <NextLink href="/create" passHref>
         <Link mr="10" data-active={isActive('/create')} fontWeight="bold">
           New post

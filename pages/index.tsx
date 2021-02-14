@@ -31,7 +31,7 @@ const Blog: React.FC<Props> = (props) => {
         {props.feed.map((post) => (
           <WrapItem
             key={post.id}
-            width="500px"
+            width="45%"
             p="4"
             borderRadius="lg"
             border="2px"

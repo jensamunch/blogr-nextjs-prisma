@@ -1,6 +1,7 @@
 // pages/create.tsx
 
 import React, { useState } from 'react'
+import Router from 'next/router'
 import Layout from '../components/Layout'
 import { FormControl, FormLabel, Heading, Input, Textarea, Box, Button } from '@chakra-ui/react'
 
@@ -10,8 +11,17 @@ const Draft: React.FC = () => {
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-    // TODO
-    // You will implement this next ...
+    try {
+      const body = { title, content }
+      await fetch('/api/post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+      await Router.push('/')
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -39,14 +49,7 @@ const Draft: React.FC = () => {
             />
           </FormControl>
 
-          <Button
-            isDisabled={!content || !title}
-            type="submit"
-            value="Create"
-            size="lg"
-            m="2"
-            colorScheme="blue"
-          >
+          <Button isDisabled={!content || !title} type="submit" size="lg" m="2" colorScheme="blue">
             Create
           </Button>
           <Button size="lg" m="2" colorScheme="blue">
