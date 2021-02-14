@@ -1,9 +1,9 @@
 // Header.tsx
 import React from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
-import { Flex, Box, Spacer, Button, useColorMode } from '@chakra-ui/react'
+import { Text, Link, Flex, Box, Spacer, Button, useColorMode } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 
 const Header: React.FC = () => {
@@ -13,80 +13,60 @@ const Header: React.FC = () => {
 
   const [session, loading] = useSession()
 
-  let left = (
-    <Box p="2" border="2px" borderColor="gray.200">
-      <Button m={4} onClick={toggleColorMode}>
-        {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-      </Button>
-      <Link href="/">
-        <a className="bold" data-active={isActive('/')}>
+  const left = (
+    <Box p="2">
+      <NextLink href="/" passHref>
+        <Link mr="10" data-active={isActive('/')} fontWeight="bold">
           Feed
-        </a>
-      </Link>
+        </Link>
+      </NextLink>
+
+      <NextLink href="/drafts" passHref>
+        <Link mr="10" data-active={isActive('/drafts')} fontWeight="bold">
+          My Drafts
+        </Link>
+      </NextLink>
+
+      <NextLink href="/create" passHref>
+        <Link mr="10" data-active={isActive('/create')} fontWeight="bold">
+          New post
+        </Link>
+      </NextLink>
     </Box>
   )
 
   let right = null
 
   if (loading) {
-    left = (
-      <Box p="2" border="2px" borderColor="gray.200">
-        <Button m={4} onClick={toggleColorMode}>
-          {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-        </Button>
-        <Link href="/">
-          <a className="bold" data-active={isActive('/')}>
-            Feed
-          </a>
-        </Link>
-      </Box>
-    )
     right = (
-      <Box p="2" border="2px" borderColor="gray.200">
-        <p>Validating session ...</p>
+      <Box p="2">
+        <Text>Validating session ...</Text>
       </Box>
     )
   }
 
   if (!session) {
     right = (
-      <Box p="2" border="2px" borderColor="gray.200">
-        <Link href="/api/auth/signin">
-          <a data-active={isActive('/signup')}>Log in</a>
-        </Link>
+      <Box p="2">
+        <NextLink href="/api/auth/signin" passHref>
+          <Link mr="2" data-active={isActive('/signup')} fontWeight="bold">
+            Login
+          </Link>
+        </NextLink>
       </Box>
     )
   }
 
   if (session) {
-    left = (
-      <Box p="2" border="2px" borderColor="gray.200">
+    right = (
+      <Box p="2">
+        <span style={{ paddingRight: '1rem' }}> {session.user.email} </span>
+        <Link onClick={() => signOut()} mr="2" data-active={isActive('/create')} fontWeight="bold">
+          Log out
+        </Link>
         <Button m={4} onClick={toggleColorMode}>
           {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
         </Button>
-        <Link href="/">
-          <a className="bold" data-active={isActive('/')}>
-            Feed
-          </a>
-        </Link>
-        <Link href="/drafts">
-          <a data-active={isActive('/drafts')}>My drafts</a>
-        </Link>
-      </Box>
-    )
-    right = (
-      <Box p="2" border="2px" borderColor="gray.200">
-        <p>
-          {session.user.name} ({session.user.email})
-        </p>
-        <Link href="/create">
-          <button>
-            <a>New post</a>
-          </button>
-        </Link>
-        <button onClick={() => signOut()}>
-          <a>Log out</a>
-        </button>
       </Box>
     )
   }

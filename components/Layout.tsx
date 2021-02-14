@@ -1,18 +1,18 @@
 import React, { ReactNode } from 'react'
 import Header from './Header'
-import { Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 type Props = {
   children: ReactNode
 }
 
 const Layout: React.FC<Props> = (props) => (
-  <div>
-    <Header />
-    <Flex direction="column" maxW={{ xl: '1200px' }} m="4">
+  <Flex align="center" justify="center">
+    <Box w="1200px" m="4">
+      <Header />
       {props.children}
-    </Flex>
-  </div>
+    </Box>
+  </Flex>
 )
 
 export default Layout
