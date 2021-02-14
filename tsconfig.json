@@ -1,5 +1,4 @@
 {
-  "strict": true,
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -26,5 +25,5 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "pages/theme.js"  ]
 }
