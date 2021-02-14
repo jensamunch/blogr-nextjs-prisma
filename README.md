@@ -12,5 +12,6 @@ ncu -u
 
 
 ### START WORKING ON PRISMA
-
-
+npm install @prisma/cli --save-dev
+npx prisma init
+Going through this post to where I can run: `npx prisma studio`
