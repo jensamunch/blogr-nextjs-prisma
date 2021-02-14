@@ -22,3 +22,5 @@ Going through this post to where I can run: `npx prisma studio`
 npm install next-auth
 npx prisma db push --preview-feature
 mkdir -p pages/api/auth && touch pages/api/auth/[...nextauth].ts
+
+### Step 6: add new post functionality 
