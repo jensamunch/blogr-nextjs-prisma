@@ -7,6 +7,9 @@ npx create-next-app --example https://github.com/nikolasburk/blogr-nextjs-prisma
 npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 ncu -u
 
+### Check data and edit
+npx prisma studio
+
 ### Fix up Chakra
 - Turn on dark mode
 
@@ -16,3 +19,6 @@ npx prisma init
 Going through this post to where I can run: `npx prisma studio`
 
 ### Next up is authentication
+npm install next-auth
+npx prisma db push --preview-feature
+mkdir -p pages/api/auth && touch pages/api/auth/[...nextauth].ts
