@@ -1,10 +1,12 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
+import Router from 'next/router'
+import { useSession } from 'next-auth/client'
 import ReactMarkdown from 'react-markdown'
 import Layout from '../../components/Layout'
 import { PostProps } from '../../components/Post'
 import prisma from '../../lib/prisma'
-import { Text } from '@chakra-ui/react'
+import { Box, Center, Spinner, Button, Text } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -13,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
     include: {
       author: {
-        select: { name: true },
+        select: { name: true, email: true },
       },
     },
   })
@@ -22,7 +24,28 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 }
 
+async function deletePost(id: number): Promise<void> {
+  await fetch(`http://localhost:3000/api/post/${id}`, {
+    method: 'DELETE',
+  })
+  Router.push('/', null, { shallow: true })
+}
+
 const Post: React.FC<PostProps> = (props) => {
+  const [session, loading] = useSession()
+
+  if (loading) {
+    return (
+      <Center h="100%" w="100%">
+        <Spinner size="xl" />
+      </Center>
+    )
+  }
+
+  const userHasValidSession = Boolean(session)
+  const postBelongsToUser = session?.user?.email === props.author?.email
+  console.log(session?.user?.email + props.author?.email)
+
   let title = props.title
   if (!props.published) {
     title = `${title} (Draft)`
@@ -30,15 +53,24 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
     <Layout>
-      <Text fontSize="lg" fontWeight="bold">
-        {title}
-      </Text>
-      <Text mb={4} fontSize="sm">
-        By {props?.author?.name || 'Unknown author'}
-      </Text>
-      <Text mb={4} fontSize="sm">
-        <ReactMarkdown source={props.content} />
-      </Text>
+      <Box>
+        <Text fontSize="lg" fontWeight="bold">
+          {title}
+        </Text>
+        <Text mb={4} fontSize="sm">
+          {props?.author?.name || 'Unknown author'} - {props?.author?.email || 'Unknown Email'}
+        </Text>
+        <Text mb={4} fontSize="sm">
+          <ReactMarkdown source={props.content} />
+        </Text>
+      </Box>
+      <Box>
+        {userHasValidSession && postBelongsToUser && (
+          <Button size="lg" m="2" colorScheme="blue" onClick={() => deletePost(props.id)}>
+            Delete
+          </Button>
+        )}
+      </Box>
     </Layout>
   )
 }
