@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GetServerSideProps } from 'next'
 import Router from 'next/router'
 import { useSession } from 'next-auth/client'
@@ -24,19 +24,26 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 }
 
-async function deletePost(id: number): Promise<void> {
-  await fetch(`/api/post/${id}`, {
-    method: 'DELETE',
-  })
-  Router.push('/', null, { shallow: true })
-}
-
 const Post: React.FC<PostProps> = (props) => {
   const [session, loading] = useSession()
+  const [deleting, setDeleting] = useState(false)
+
+  async function deletePost(id: number): Promise<void> {
+    setDeleting(true)
+    try {
+      await fetch(`/api/post/${id}`, {
+        method: 'DELETE',
+      })
+      await Router.push('/', null, { shallow: true })
+    } catch (error) {
+      setDeleting(false)
+      console.error(error)
+    }
+  }
 
   if (loading) {
     return (
-      <Center h="100%" w="100%">
+      <Center h="100vh" w="100vw">
         <Spinner size="xl" />
       </Center>
     )
@@ -67,7 +74,7 @@ const Post: React.FC<PostProps> = (props) => {
       <Box>
         {userHasValidSession && postBelongsToUser && (
           <Button size="lg" m="2" colorScheme="blue" onClick={() => deletePost(props.id)}>
-            Delete
+            {deleting ? <Spinner /> : 'Delete'}
           </Button>
         )}
       </Box>

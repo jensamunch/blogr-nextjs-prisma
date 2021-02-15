@@ -29,7 +29,6 @@ const Draft: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
-      setLoading(false)
       await Router.push('/', null, { shallow: true })
     } catch (error) {
       setLoading(false)
