@@ -17,5 +17,4 @@ const options = {
     }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
-  secret: process.env.SECRET,
 }
