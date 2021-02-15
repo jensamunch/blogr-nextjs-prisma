@@ -37,7 +37,7 @@ const Draft: React.FC = () => {
   }
 
   return (
-    <Layout>
+    <Layout title="My First Blog">
       <Box>
         <form onSubmit={submitData}>
           <Heading mt="4" mb="4">
