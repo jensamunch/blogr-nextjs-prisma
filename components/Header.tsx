@@ -47,6 +47,9 @@ const Header: React.FC = () => {
             Login
           </Link>
         </NextLink>
+        <Button onClick={toggleColorMode}>
+          {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+        </Button>
       </Box>
     )
   }
@@ -58,7 +61,7 @@ const Header: React.FC = () => {
         <Link onClick={() => signOut()} mr="2" data-active={isActive('/create')} fontWeight="bold">
           Log out
         </Link>
-        <Button m={4} onClick={toggleColorMode}>
+        <Button onClick={toggleColorMode}>
           {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
         </Button>
       </Box>
