@@ -20,8 +20,11 @@ Going through this post to where I can run: `npx prisma studio`
 
 ### Next up is authentication
 npm install next-auth
+
+### Set up AMS RDS
+edit Security Groups set inbound/outbound to allow 0.0.0.0/0
+nc -zv database-1.cyocgidsr6ig.eu-west-1.rds.amazonaws.com 5432
+
+### Set up prisma
 npx prisma db push --preview-feature
 npx prisma migrate dev --preview-feature 
-mkdir -p pages/api/auth && touch pages/api/auth/[...nextauth].ts
-
-### Step 6: add new post functionality 
