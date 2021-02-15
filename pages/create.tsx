@@ -3,14 +3,25 @@
 import React, { useState } from 'react'
 import Router from 'next/router'
 import Layout from '../components/Layout'
-import { FormControl, FormLabel, Heading, Input, Textarea, Box, Button } from '@chakra-ui/react'
+import {
+  Spinner,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Textarea,
+  Box,
+  Button,
+} from '@chakra-ui/react'
 
 const Draft: React.FC = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
+    setLoading(true)
     try {
       const body = { title, content }
       await fetch('/api/post', {
@@ -18,8 +29,10 @@ const Draft: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
-      await Router.push('/')
+      setLoading(false)
+      await Router.push('/', null, { shallow: true })
     } catch (error) {
+      setLoading(false)
       console.error(error)
     }
   }
@@ -50,7 +63,7 @@ const Draft: React.FC = () => {
           </FormControl>
 
           <Button isDisabled={!content || !title} type="submit" size="lg" m="2" colorScheme="blue">
-            Create
+            {loading ? <Spinner /> : 'Create'}
           </Button>
           <Button size="lg" m="2" colorScheme="blue">
             Cancel
