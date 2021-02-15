@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Router from 'next/router'
 import { useSession } from 'next-auth/client'
 import ReactMarkdown from 'react-markdown'
@@ -8,7 +8,7 @@ import { PostProps } from '../../components/Post'
 import prisma from '../../lib/prisma'
 import { Box, Center, Spinner, Button, Text } from '@chakra-ui/react'
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
     where: {
       id: Number(params?.id) || -1,
@@ -21,6 +21,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   })
   return {
     props: post,
+    revalidate: 1, // In seconds
   }
 }
 
@@ -59,7 +60,7 @@ const Post: React.FC<PostProps> = (props) => {
   }
 
   return (
-    <Layout>
+    <Layout title="My First Blog">
       <Box>
         <Text fontSize="lg" fontWeight="bold">
           {title}

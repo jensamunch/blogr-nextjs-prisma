@@ -5,7 +5,7 @@ import Post, { PostProps } from '../components/Post'
 import { Wrap, WrapItem, Heading, Box } from '@chakra-ui/react'
 import prisma from '../lib/prisma'
 
-export const getServerSideProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
@@ -14,7 +14,10 @@ export const getServerSideProps: GetStaticProps = async () => {
       },
     },
   })
-  return { props: { feed } }
+  return {
+    props: { feed },
+    revalidate: 1, // In seconds
+  }
 }
 
 type Props = {
@@ -23,7 +26,7 @@ type Props = {
 
 const Blog: React.FC<Props> = (props) => {
   return (
-    <Layout>
+    <Layout title="My First Blog">
       <Box>
         <Heading pb="4">Public Feed</Heading>
       </Box>
