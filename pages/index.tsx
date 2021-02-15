@@ -5,7 +5,7 @@ import Post, { PostProps } from '../components/Post'
 import { Wrap, WrapItem, Heading, Box } from '@chakra-ui/react'
 import prisma from '../lib/prisma'
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
