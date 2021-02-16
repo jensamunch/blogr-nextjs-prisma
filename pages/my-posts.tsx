@@ -24,7 +24,7 @@ type Props = {
   feed: PostProps[]
 }
 
-const Feed: React.FC<Props> = (props) => {
+const MyFeed: React.FC<Props> = (props) => {
   return (
     <Layout title="My First Blog">
       <Box>
@@ -48,4 +48,4 @@ const Feed: React.FC<Props> = (props) => {
   )
 }
 
-export default Feed
+export default MyFeed

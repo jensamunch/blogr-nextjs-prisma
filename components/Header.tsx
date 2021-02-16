@@ -17,7 +17,13 @@ const Header: React.FC = () => {
     <Box p="2">
       <NextLink href="/" passHref>
         <Link mr="10" data-active={isActive('/')} fontWeight="bold">
-          Feed
+          Public Feed
+        </Link>
+      </NextLink>
+
+      <NextLink href="/my-posts" passHref>
+        <Link mr="10" data-active={isActive('/my-posts')} fontWeight="bold">
+          My Posts
         </Link>
       </NextLink>
 
