@@ -18,6 +18,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : 'Unknown author'
   return (
     <Box>
+      <Text as="mark"> {post.published ? 'LIVE' : 'DRAFT'}</Text>
       <Text fontSize="lg" fontWeight="bold">
         {post.title}
       </Text>

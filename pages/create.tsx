@@ -3,6 +3,8 @@
 import React, { useState } from 'react'
 import Router from 'next/router'
 import Layout from '../components/Layout'
+import { useSession } from 'next-auth/client'
+
 import {
   Spinner,
   FormControl,
@@ -14,7 +16,8 @@ import {
   Button,
 } from '@chakra-ui/react'
 
-const Draft: React.FC = () => {
+const Create: React.FC = () => {
+  const [session] = useSession()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
@@ -36,8 +39,17 @@ const Draft: React.FC = () => {
     }
   }
 
+  if (!session) {
+    return (
+      <Layout title="Write a post">
+        <Heading>Write a post</Heading>
+        <div>You need to be authenticated to view this page.</div>
+      </Layout>
+    )
+  }
+
   return (
-    <Layout title="My First Blog">
+    <Layout title="Write a post">
       <Box>
         <form onSubmit={submitData}>
           <Heading mt="4" mb="4">
@@ -73,4 +85,4 @@ const Draft: React.FC = () => {
   )
 }
 
-export default Draft
+export default Create

@@ -12,19 +12,12 @@ const Header: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   const [session, loading] = useSession()
-  console.log(session)
 
   const left = (
     <Box p="2">
       <NextLink href="/" passHref>
         <Link mr="10" data-active={isActive('/')} fontWeight="bold">
           Public Feed
-        </Link>
-      </NextLink>
-
-      <NextLink href="/my-posts" passHref>
-        <Link mr="10" data-active={isActive('/my-posts')} fontWeight="bold">
-          My Posts
         </Link>
       </NextLink>
 
