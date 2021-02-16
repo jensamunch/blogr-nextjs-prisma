@@ -1,10 +1,9 @@
 import React from 'react'
-import Layout from '../components/Layout'
-import Post, { PostProps } from '../components/Post'
+import Layout from '../../components/Layout'
 import { Wrap, WrapItem, Heading, Box } from '@chakra-ui/react'
 
 type Props = {
-  feed: PostProps[]
+  feed: string
 }
 
 const MyFeed: React.FC<Props> = (props) => {
