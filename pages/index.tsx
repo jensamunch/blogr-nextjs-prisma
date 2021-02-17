@@ -26,9 +26,11 @@ type Props = {
 
 const Feed: React.FC<Props> = (props) => {
   return (
-    <Layout title="Feed">
+    <Layout title="Public Feed">
       <Box>
-        <Heading pb="4">Public Feed</Heading>
+        <Heading mt="4" mb="4">
+          Public Feed
+        </Heading>
       </Box>
       <Wrap spacing="20px">
         {props.feed.map((post) => (
