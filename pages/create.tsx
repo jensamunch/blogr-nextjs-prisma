@@ -42,7 +42,9 @@ const Create: React.FC = () => {
   if (!session) {
     return (
       <Layout title="Write a post">
-        <Heading>Write a post</Heading>
+        <Heading mt="4" mb="4">
+          Write a post
+        </Heading>
         <div>You need to be authenticated to view this page.</div>
       </Layout>
     )
@@ -50,11 +52,11 @@ const Create: React.FC = () => {
 
   return (
     <Layout title="Write a post">
-      <Box>
-        <form onSubmit={submitData}>
-          <Heading mt="4" mb="4">
-            New Draft
-          </Heading>
+      <Heading mt="4" mb="4">
+        Write a post
+      </Heading>
+      <form onSubmit={submitData}>
+        <Box>
           <FormControl mb="4" id="title" isRequired>
             <FormLabel>Title of the post</FormLabel>
             <Input
@@ -79,8 +81,8 @@ const Create: React.FC = () => {
           <Button size="lg" m="2" colorScheme="blue">
             Cancel
           </Button>
-        </form>
-      </Box>
+        </Box>
+      </form>
     </Layout>
   )
 }

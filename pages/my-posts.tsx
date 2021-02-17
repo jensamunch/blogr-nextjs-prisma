@@ -68,7 +68,7 @@ const MyPosts: React.FC<Props> = (props) => {
     return (
       <Layout title="My Posts">
         <Heading mt="4" mb="4">
-          My Drafts
+          My Posts
         </Heading>
         <div>You need to be authenticated to view this page.</div>
       </Layout>
@@ -79,7 +79,7 @@ const MyPosts: React.FC<Props> = (props) => {
     <Layout title="My Posts">
       <Box className="page">
         <Heading mt="4" mb="4">
-          My Drafts
+          My Posts
         </Heading>
         <Flex wrap="wrap" direction="row">
           {props.myposts.map((post) => (
