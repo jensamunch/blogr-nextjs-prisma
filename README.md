@@ -1,11 +1,6 @@
-  const feed = await prisma.post.findMany({
-    where: { published: true },
-    include: {
-      author: {
-        select: { name: true, email: true },
-      },
-    },
-  })
+https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-nextjs-api-routes-auth
+https://vercel.com/guides/nextjs-prisma-postgres
+https://paulintrognon.fr/blog/typescript-prettier-eslint-next-js
   
 # Fullstack Authentication Example with Next.js and NextAuth.js
 
@@ -37,3 +32,6 @@ nc -zv database-1.cyocgidsr6ig.eu-west-1.rds.amazonaws.com 5432
 ### Set up prisma
 npx prisma db push --preview-feature
 npx prisma migrate dev --preview-feature 
+
+### Issues outstanding
+- would be nice to not have to refresh whole page when you publish/unpublish/delete - probably need redux for that

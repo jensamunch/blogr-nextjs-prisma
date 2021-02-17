@@ -51,17 +51,36 @@ const MyPosts: React.FC<Props> = (props) => {
   }
 
   async function publishPost(id: number): Promise<void> {
-    await fetch(`/api/publish/${id}`, {
-      method: 'PUT',
-    })
-    await Router.push('/my-posts')
+    try {
+      await fetch(`/api/publish/${id}`, {
+        method: 'PUT',
+      })
+      console.log(id)
+      console.log(props.myposts)
+      // modify props.myposts
+      // Find index of specific object using findIndex method.
+      // objIndex = myArray.findIndex((obj) => obj.id == 1
+      // Log object to Console.
+      // console.log('Before update: ', myArray[objIndex])
+      // Update object's name property.
+      // myArray[objIndex].name = 'Laila'
+      //Log object to console again.
+      // console.log('After update: ', myArray[objIndex])
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   async function unPublishPost(id: number): Promise<void> {
-    await fetch(`/api/unpublish/${id}`, {
-      method: 'PUT',
-    })
-    await Router.push('/my-posts')
+    try {
+      await fetch(`/api/unpublish/${id}`, {
+        method: 'PUT',
+      })
+      console.log(id)
+      // this is where we should be modifying the local data
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   if (!session) {
