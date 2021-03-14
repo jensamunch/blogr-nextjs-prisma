@@ -38,7 +38,7 @@ const Feed: React.FC<Props> = (props) => {
             key={post.id}
             width="45%"
             p="4"
-            borderRadius="lg"
+            borderRadius="none"
             border="2px"
             borderColor="gray.200"
           >
