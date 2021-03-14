@@ -8,7 +8,7 @@ const Header: React.FC = () => {
   const router = useRouter()
   const [session, loading] = useSession()
 
-  let signedin = (
+  let rightnav = (
     <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
       <Link href="/api/auth/signin" passHref>
         <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
@@ -19,12 +19,12 @@ const Header: React.FC = () => {
   )
 
   if (session) {
-    signedin = (
+    rightnav = (
       <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
         {session.user.email}
         <a
           onClick={() => signOut()}
-          className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+          className="ml-3 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
         >
           Sign Out
         </a>
@@ -91,7 +91,7 @@ const Header: React.FC = () => {
               </a>
             </Link>
           </nav>
-          {signedin}
+          {rightnav}
         </div>
       </div>
 

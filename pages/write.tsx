@@ -44,37 +44,53 @@ const Create: React.FC = () => {
 
   return (
     <Layout title="Write a post">
-      {/*    <Heading mt="4" mb="4">
-        Write a post
-      </Heading>
-      <form onSubmit={submitData}>
-        <Box>
-          <FormControl mb="4" id="title" isRequired>
-            <FormLabel>Title of the post</FormLabel>
-            <Input
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
-              type="text"
-              value={title}
-            />
-          </FormControl>
-          <FormControl mb="4" id="content" isRequired>
-            <FormLabel>Content of the post</FormLabel>
-            <Textarea
-              onChange={(e) => setContent(e.target.value)}
-              value={content}
-              placeholder="Here is a sample placeholder"
-            />
-          </FormControl>
+      <div className="max-w-xl p-10 mx-auto">
+        <form onSubmit={submitData} className="space-y-8">
+          <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div className="sm:col-span-4">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Title
+              </label>
+              <div className="mt-1">
+                <input
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Title"
+                  type="text"
+                  value={title}
+                  id="title"
+                  name="title"
+                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                />
+              </div>
+            </div>{' '}
+          </div>
 
-          <Button isDisabled={!content || !title} type="submit" size="lg" m="2" colorScheme="blue">
-            {loading ? <Spinner /> : 'Create'}
-          </Button>
-          <Button size="lg" m="2" colorScheme="blue">
+          <div className="sm:col-span-6">
+            <label htmlFor="about" className="block text-sm font-medium text-gray-700">
+              Content
+            </label>
+            <div className="mt-1">
+              <textarea
+                onChange={(e) => setContent(e.target.value)}
+                id="content"
+                name="content"
+                rows="3"
+                value={content}
+                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+              ></textarea>
+            </div>
+            <p className="mt-2 text-sm text-gray-500">This is the body of the post.</p>
+          </div>
+
+          <button className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded" type="submit">
+            {loading ? "Saving" : 'Create'}
+          </button>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
             Cancel
-          </Button>
-        </Box>
-      </form> */}
+          </button>
+
+        </form>
+      </div>
     </Layout>
   )
 }
