@@ -2,7 +2,6 @@ import React from 'react'
 import { GetStaticProps } from 'next'
 import Layout from '../components/Layout'
 import Post, { PostProps } from '../components/Post'
-import { Wrap, WrapItem, Heading, Box } from '@chakra-ui/react'
 import prisma from '../lib/prisma'
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -27,25 +26,13 @@ type Props = {
 const Feed: React.FC<Props> = (props) => {
   return (
     <Layout title="Public Feed">
-      <Box>
-        <Heading mt="4" mb="4">
-          Public Feed
-        </Heading>
-      </Box>
-      <Wrap spacing="20px">
+      <div className="mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
         {props.feed.map((post) => (
-          <WrapItem
-            key={post.id}
-            width="45%"
-            p="4"
-            borderRadius="none"
-            border="2px"
-            borderColor="gray.200"
-          >
+          <div className="mx-12" key={post.id}>
             <Post post={post} />
-          </WrapItem>
+          </div>
         ))}
-      </Wrap>
+      </div>
     </Layout>
   )
 }

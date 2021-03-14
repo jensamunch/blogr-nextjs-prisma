@@ -1,16 +1,12 @@
-import { ChakraProvider } from '@chakra-ui/react'
 import { AppProps } from 'next/app'
 import { Provider } from 'next-auth/client'
-
-import customTheme from "../utils/theme";
+import 'tailwindcss/tailwind.css'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <ChakraProvider resetCSS theme={customTheme}>
-      <Provider session={pageProps.session}>
-        <Component {...pageProps} />
-      </Provider>
-    </ChakraProvider>
+    <Provider session={pageProps.session}>
+      <Component {...pageProps} />
+    </Provider>
   )
 }
 

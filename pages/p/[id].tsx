@@ -4,7 +4,6 @@ import ReactMarkdown from 'react-markdown'
 import Layout from '../../components/Layout'
 import { PostProps } from '../../components/Post'
 import prisma from '../../lib/prisma'
-import { Box, Text } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -26,17 +25,19 @@ const Post: React.FC<PostProps> = (props) => {
   const title = props.title
   return (
     <Layout title="My First Blog">
-      <Box>
-        <Text fontSize="lg" fontWeight="bold">
-          {title}
-        </Text>
-        <Text mb={4} fontSize="sm">
-          {props?.author?.name || 'Unknown author'} - {props?.author?.email || 'Unknown Email'}
-        </Text>
-        <Text mb={4} fontSize="sm">
+      <p className="text-sm text-gray-500">
+        <time dateTime="2020-03-16">Mar 16, 2020</time>
+      </p>
+      <a href="#" className="mt-2 block">
+        <p className="text-xl font-semibold text-gray-900">{title}</p>
+        <p className="text-sm font-semibold text-gray-500">
+          {props?.author?.name || 'Unknown author'}
+        </p>
+
+        <p className="mt-5 text-base text-gray-900">
           <ReactMarkdown source={props.content} />
-        </Text>
-      </Box>
+        </p>
+      </a>
     </Layout>
   )
 }
