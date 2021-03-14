@@ -7,6 +7,8 @@ import { signOut, useSession } from 'next-auth/client'
 const Header: React.FC = () => {
   const router = useRouter()
   const [session, loading] = useSession()
+  const [navbarOpen, setNavbarOpen] = React.useState(true)
+  console.log(navbarOpen)
 
   let rightnav = (
     <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
@@ -51,6 +53,7 @@ const Header: React.FC = () => {
           <div className="-mr-2 -my-2 md:hidden">
             <button
               type="button"
+              onClick={() => setNavbarOpen(!navbarOpen)}
               className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
               aria-expanded="false"
             >
@@ -75,7 +78,7 @@ const Header: React.FC = () => {
 
           {/* Middle Navbar */}
           <nav className="hidden md:flex space-x-10">
-          <Link href="/">
+            <Link href="/">
               <a className={router.pathname == '/' ? 'text-gray-900' : 'text-gray-500'}>
                 Public Posts
               </a>
@@ -96,7 +99,12 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Navbar */}
-      <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+      <div
+        className={
+          'absolute top-0 inset-x-0 p-2 transition transform origin-top-right md-hidden' +
+          (navbarOpen ? ' ' : ' hidden')
+        }
+      >
         <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
           <div className="pt-5 pb-6 px-5">
             <div className="flex items-center justify-between">
@@ -110,6 +118,7 @@ const Header: React.FC = () => {
               <div className="-mr-2">
                 <button
                   type="button"
+                  onClick={() => setNavbarOpen(!navbarOpen)}
                   className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                 >
                   <span className="sr-only">Close menu</span>
