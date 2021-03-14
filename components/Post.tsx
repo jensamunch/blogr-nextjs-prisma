@@ -14,13 +14,13 @@ export type PostProps = {
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const draft = (
-    <span className="text-xs font-semibold inline-block py-1 px-4 mb-2 uppercase rounded-full bg-red-200 uppercase last:mr-0 mr-1">
+    <span className="text-xs font-semibold inline-block py-1 px-4 mb-2 rounded-full bg-red-200 uppercase last:mr-0 mr-1">
       DRAFT
     </span>
   )
 
   const published = (
-    <span className="text-xs font-semibold inline-block py-1 px-4 mb-2 uppercase rounded-full bg-green-200 uppercase last:mr-0 mr-1">
+    <span className="text-xs font-semibold inline-block py-1 px-4 mb-2 rounded-full bg-green-200 uppercase last:mr-0 mr-1">
       PUBLISHED
     </span>
   )

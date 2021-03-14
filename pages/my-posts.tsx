@@ -102,11 +102,22 @@ const MyPosts: React.FC<Props> = (props) => {
         {props.myposts.map((post) => (
           <div key={post.id} className="mx-12">
             <Post post={post} />
-            <button className="mt-5 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded" onClick={() => deletePost(post.id)}>{deleting ? 'spinner' : 'Delete'}</button>
-            <button className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded" size="md" m="2" onClick={() => publishPost(post.id)}>
+            <button
+              className="mt-5 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
+              onClick={() => deletePost(post.id)}
+            >
+              {deleting ? 'spinner' : 'Delete'}
+            </button>
+            <button
+              className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
+              onClick={() => publishPost(post.id)}
+            >
               Publish
             </button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded" size="md" m="2" onClick={() => unPublishPost(post.id)}>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
+              onClick={() => unPublishPost(post.id)}
+            >
               Unpublish
             </button>
           </div>

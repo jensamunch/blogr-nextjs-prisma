@@ -74,7 +74,7 @@ const Create: React.FC = () => {
                 onChange={(e) => setContent(e.target.value)}
                 id="content"
                 name="content"
-                rows="3"
+                rows={3}
                 value={content}
                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
               ></textarea>
@@ -82,13 +82,15 @@ const Create: React.FC = () => {
             <p className="mt-2 text-sm text-gray-500">This is the body of the post.</p>
           </div>
 
-          <button className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded" type="submit">
-            {loading ? "Saving" : 'Create'}
+          <button
+            className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
+            type="submit"
+          >
+            {loading ? 'Saving' : 'Create'}
           </button>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
             Cancel
           </button>
-
         </form>
       </div>
     </Layout>
