@@ -28,6 +28,8 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : 'Unknown author'
   return (
     <div>
+      {post.published ? published : draft}
+      <p className="text-sm text-gray-500">Post id: {post.id}</p>
       <a href="#" className="mt-2 block">
         <p className="text-xl font-semibold text-gray-900">{post.title}</p>
         <p className="text-sm font-semibold text-gray-500">{authorName}</p>

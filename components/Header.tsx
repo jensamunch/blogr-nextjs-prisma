@@ -8,7 +8,6 @@ const Header: React.FC = () => {
   const router = useRouter()
   const [session, loading] = useSession()
   const [navbarOpen, setNavbarOpen] = React.useState(false)
-  console.log(navbarOpen)
 
   let rightnav = (
     <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">

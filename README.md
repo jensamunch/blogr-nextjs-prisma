@@ -8,8 +8,6 @@ This is the starter project for the fullstack tutorial with Next.js and Prisma. 
 
 ### Install scaffolding
 npx create-next-app --example https://github.com/nikolasburk/blogr-nextjs-prisma/tree/main blogr-nextjs-prisma
-npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
-ncu -u
 
 ### Check data and edit
 npx prisma studio
@@ -32,6 +30,3 @@ nc -zv database-1.cyocgidsr6ig.eu-west-1.rds.amazonaws.com 5432
 ### Set up prisma
 npx prisma db push --preview-feature
 npx prisma migrate dev --preview-feature 
-
-### Issues outstanding
-- would be nice to not have to refresh whole page when you publish/unpublish/delete - probably need redux for that

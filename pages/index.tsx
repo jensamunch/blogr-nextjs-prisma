@@ -12,6 +12,9 @@ export const getStaticProps: GetStaticProps = async () => {
         select: { name: true },
       },
     },
+    orderBy: {
+      id: 'desc',
+    },
   })
   return {
     props: { feed },
@@ -25,7 +28,7 @@ type Props = {
 
 const Feed: React.FC<Props> = (props) => {
   return (
-    <Layout title="Public Feed">
+    <Layout title="SWR Blogger | Public Feed">
       <div className="mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
         {props.feed.map((post) => (
           <div className="mx-12" key={post.id}>

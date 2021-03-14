@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Router from 'next/router'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
-import Post, { PostProps } from '../components/Post'
+import Post, { PostProps } from '../components/MyPost'
 import { useSession, getSession } from 'next-auth/client'
 import prisma from '../lib/prisma'
 
@@ -22,6 +22,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
         select: { name: true },
       },
     },
+    orderBy: {
+      id: 'desc',
+    },
   })
   return {
     props: { myposts },
@@ -34,17 +37,14 @@ type Props = {
 
 const MyPosts: React.FC<Props> = (props) => {
   const [session] = useSession()
-  const [deleting, setDeleting] = useState(false)
 
   async function deletePost(id: number): Promise<void> {
-    setDeleting(true)
     try {
       await fetch(`/api/post/${id}`, {
         method: 'DELETE',
       })
-      await Router.push('/my-posts', null, { shallow: true })
+      await Router.replace('/my-posts', null, { scroll: true })
     } catch (error) {
-      setDeleting(false)
       console.error(error)
     }
   }
@@ -54,20 +54,11 @@ const MyPosts: React.FC<Props> = (props) => {
       await fetch(`/api/publish/${id}`, {
         method: 'PUT',
       })
-      console.log(id)
-      console.log(props.myposts)
-      // modify props.myposts
-      // Find index of specific object using findIndex method.
-      // objIndex = myArray.findIndex((obj) => obj.id == 1
-      // Log object to Console.
-      // console.log('Before update: ', myArray[objIndex])
-      // Update object's name property.
-      // myArray[objIndex].name = 'Laila'
-      //Log object to console again.
-      // console.log('After update: ', myArray[objIndex])
+      await Router.replace('/my-posts', null, { scroll: false })
     } catch (error) {
       console.error(error)
     }
+    console.log('refeshing after publish)')
   }
 
   async function unPublishPost(id: number): Promise<void> {
@@ -75,16 +66,16 @@ const MyPosts: React.FC<Props> = (props) => {
       await fetch(`/api/unpublish/${id}`, {
         method: 'PUT',
       })
-      console.log(id)
-      // this is where we should be modifying the local data
+      await Router.replace('/my-posts', null, { scroll: false })
     } catch (error) {
       console.error(error)
     }
+    console.log('refeshing after publish)')
   }
 
   if (!session) {
     return (
-      <Layout title="My Posts">
+      <Layout title="SWR Blogger | My Posts">
         <main className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
           <div className="text-center">
             <h1 className="text-2xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-4xl">
@@ -97,7 +88,7 @@ const MyPosts: React.FC<Props> = (props) => {
   }
 
   return (
-    <Layout title="My Posts">
+    <Layout title="SWR Blogger | My Posts">
       <div className="mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
         {props.myposts.map((post) => (
           <div key={post.id} className="mx-12">
@@ -106,13 +97,13 @@ const MyPosts: React.FC<Props> = (props) => {
               className="mt-5 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
               onClick={() => deletePost(post.id)}
             >
-              {deleting ? 'spinner' : 'Delete'}
+              Delete{' '}
             </button>
             <button
               className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"
               onClick={() => publishPost(post.id)}
             >
-              Publish
+              Publish{' '}
             </button>
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded"

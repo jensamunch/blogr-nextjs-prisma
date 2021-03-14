@@ -25,19 +25,16 @@ const Post: React.FC<PostProps> = (props) => {
   const title = props.title
   return (
     <Layout title="My First Blog">
-      <p className="text-sm text-gray-500">
-        <time dateTime="2020-03-16">Mar 16, 2020</time>
-      </p>
-      <a href="#" className="mt-2 block">
+      <div className="max-w-4xl p-10 mx-auto">
         <p className="text-xl font-semibold text-gray-900">{title}</p>
-        <p className="text-sm font-semibold text-gray-500">
+        <p className="mb-5 text-sm font-semibold text-gray-500">
           {props?.author?.name || 'Unknown author'}
         </p>
 
-        <p className="mt-5 text-base text-gray-900">
+        <article className="prose lg:prose-xl">
           <ReactMarkdown source={props.content} />
-        </p>
-      </a>
+        </article>
+      </div>
     </Layout>
   )
 }

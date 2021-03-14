@@ -21,7 +21,7 @@ const Create: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
-      await Router.push('/', null, { shallow: true })
+      await Router.push('/my-posts', null)
     } catch (error) {
       setLoading(false)
       console.error(error)
@@ -43,8 +43,8 @@ const Create: React.FC = () => {
   }
 
   return (
-    <Layout title="Write a post">
-      <div className="max-w-xl p-10 mx-auto">
+    <Layout title="SWR Blogger | Write a post">
+      <div className="max-w-4xl p-10 mx-auto">
         <form onSubmit={submitData} className="space-y-8">
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div className="sm:col-span-4">
@@ -74,7 +74,7 @@ const Create: React.FC = () => {
                 onChange={(e) => setContent(e.target.value)}
                 id="content"
                 name="content"
-                rows={3}
+                rows={10}
                 value={content}
                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
               ></textarea>
