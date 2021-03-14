@@ -5,7 +5,6 @@ import Layout from '../components/Layout'
 import Post, { PostProps } from '../components/Post'
 import { useSession, getSession } from 'next-auth/client'
 import prisma from '../lib/prisma'
-import { Flex, Spinner, Button, Heading, Box } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })
@@ -86,46 +85,24 @@ const MyPosts: React.FC<Props> = (props) => {
   if (!session) {
     return (
       <Layout title="My Posts">
-        <Heading mt="4" mb="4">
-          My Posts
-        </Heading>
-        <div>You need to be authenticated to view this page.</div>
+        <main className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
+          <div className="text-center">
+            <h1 className="text-2xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-4xl">
+              You need to be signed in for this page
+            </h1>
+          </div>
+        </main>
       </Layout>
     )
   }
 
   return (
     <Layout title="My Posts">
-      <Box className="page">
-        <Heading mt="4" mb="4">
-          My Posts
-        </Heading>
-        <Flex wrap="wrap" direction="row">
-          {props.myposts.map((post) => (
-            <Flex
-              key={post.id}
-              width="400px"
-              p="4"
-              m="4"
-              borderRadius="lg"
-              border="2px"
-              borderColor="gray.200"
-              direction="column"
-            >
-              <Post post={post} />
-              <Button size="md" m="2" colorScheme="blue" onClick={() => deletePost(post.id)}>
-                {deleting ? <Spinner /> : 'Delete'}
-              </Button>
-              <Button size="md" m="2" colorScheme="blue" onClick={() => publishPost(post.id)}>
-                Publish
-              </Button>
-              <Button size="md" m="2" colorScheme="blue" onClick={() => unPublishPost(post.id)}>
-                Unpublish
-              </Button>
-            </Flex>
-          ))}
-        </Flex>
-      </Box>
+      <div className="mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
+        {props.myposts.map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
+      </div>
     </Layout>
   )
 }

@@ -5,17 +5,6 @@ import Router from 'next/router'
 import Layout from '../components/Layout'
 import { useSession } from 'next-auth/client'
 
-import {
-  Spinner,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  Textarea,
-  Box,
-  Button,
-} from '@chakra-ui/react'
-
 const Create: React.FC = () => {
   const [session] = useSession()
   const [title, setTitle] = useState('')
@@ -41,18 +30,21 @@ const Create: React.FC = () => {
 
   if (!session) {
     return (
-      <Layout title="Write a post">
-        <Heading mt="4" mb="4">
-          Write a post
-        </Heading>
-        <div>You need to be authenticated to view this page.</div>
+      <Layout title="Write Post">
+        <main className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
+          <div className="text-center">
+            <h1 className="text-2xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-4xl">
+              You need to be signed in for this page
+            </h1>
+          </div>
+        </main>
       </Layout>
     )
   }
 
   return (
     <Layout title="Write a post">
-      <Heading mt="4" mb="4">
+      {/*    <Heading mt="4" mb="4">
         Write a post
       </Heading>
       <form onSubmit={submitData}>
@@ -82,7 +74,7 @@ const Create: React.FC = () => {
             Cancel
           </Button>
         </Box>
-      </form>
+      </form> */}
     </Layout>
   )
 }
