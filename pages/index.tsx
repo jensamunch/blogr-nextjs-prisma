@@ -28,7 +28,9 @@ const Feed: React.FC<Props> = (props) => {
     <Layout title="Public Feed">
       <div className="mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
         {props.feed.map((post) => (
-          <Post key={post.id} post={post} />
+          <div className="mx-12" key={post.id}>
+            <Post post={post} />
+          </div>
         ))}
       </div>
     </Layout>

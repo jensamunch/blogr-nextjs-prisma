@@ -15,7 +15,7 @@ export type PostProps = {
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : 'Unknown author'
   return (
-    <div className="mx-12">
+    <div>
       <p className="text-sm text-gray-500">
         <time dateTime="2020-03-16">Mar 16, 2020</time>
       </p>

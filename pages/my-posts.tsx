@@ -100,7 +100,16 @@ const MyPosts: React.FC<Props> = (props) => {
     <Layout title="My Posts">
       <div className="mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
         {props.myposts.map((post) => (
-          <Post key={post.id} post={post} />
+          <div key={post.id} className="mx-12">
+            <Post post={post} />
+            <button className="mt-5 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => deletePost(post.id)}>{deleting ? 'spinner' : 'Delete'}</button>
+            <button className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" size="md" m="2" onClick={() => publishPost(post.id)}>
+              Publish
+            </button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" size="md" m="2" onClick={() => unPublishPost(post.id)}>
+              Unpublish
+            </button>
+          </div>
         ))}
       </div>
     </Layout>
