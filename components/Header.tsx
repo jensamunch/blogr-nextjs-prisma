@@ -7,7 +7,7 @@ import { signOut, useSession } from 'next-auth/client'
 const Header: React.FC = () => {
   const router = useRouter()
   const [session, loading] = useSession()
-  const [navbarOpen, setNavbarOpen] = React.useState(true)
+  const [navbarOpen, setNavbarOpen] = React.useState(false)
   console.log(navbarOpen)
 
   let rightnav = (
@@ -142,7 +142,7 @@ const Header: React.FC = () => {
             </div>
             <div className="mt-6">
               <nav className="grid gap-y-8">
-                <Link href="/write">
+                <Link href="/">
                   <a className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
                     <span className="ml-3 text-base font-medium text-gray-900">Public Feed</span>
                   </a>
