@@ -75,14 +75,19 @@ const Header: React.FC = () => {
 
           {/* Middle Navbar */}
           <nav className="hidden md:flex space-x-10">
-            <Link href="/write">
-              <a className={router.pathname == '/write' ? 'text-gray-900' : 'text-gray-500'}>
-                Write Post
+          <Link href="/">
+              <a className={router.pathname == '/' ? 'text-gray-900' : 'text-gray-500'}>
+                Public Posts
               </a>
             </Link>
             <Link href="/my-posts">
               <a className={router.pathname == '/my-posts' ? 'text-gray-900' : 'text-gray-500'}>
                 My Posts
+              </a>
+            </Link>
+            <Link href="/write">
+              <a className={router.pathname == '/write' ? 'text-gray-900' : 'text-gray-500'}>
+                Write Post
               </a>
             </Link>
           </nav>
