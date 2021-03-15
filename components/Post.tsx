@@ -1,5 +1,5 @@
 import React from 'react'
-import NextLink from 'next/link'
+import Link from 'next/link'
 
 export type PostProps = {
   id: number
@@ -28,17 +28,14 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : 'Unknown author'
   return (
     <div>
-      <a href="#" className="mt-2 block">
         <p className="text-xl font-semibold text-gray-900">{post.title}</p>
         <p className="text-sm font-semibold text-gray-500">{authorName}</p>
-
         <p className="mt-5 text-base text-gray-900">{post.content.slice(0, 200) + '...'}</p>
-      </a>
       <div className="mt-5">
-        <a href="#" className="text-base font-semibold text-indigo-600 hover:text-indigo-500">
-          <NextLink href="/p/[id]" as={'/p/' + post.id} passHref>
+        <a className="text-base font-semibold text-indigo-600 hover:text-indigo-500">
+          <Link href="/p/[id]" as={'/p/' + post.id} passHref>
             Read full post
-          </NextLink>
+          </Link>
         </a>
       </div>
     </div>

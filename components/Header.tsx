@@ -3,21 +3,25 @@ import React from 'react'
 import Link from 'next/link'
 import { Router, useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
-import NProgress from 'nprogress'; //nprogress module
-import 'nprogress/nprogress.css'; //styles of nprogress
+import NProgress from 'nprogress' //nprogress module
 
-//Binding events. 
-Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on('routeChangeComplete', () => NProgress.done()); Router.events.on('routeChangeError', () => NProgress.done());  
+//Binding events.
+Router.events.on('routeChangeStart', () => NProgress.start())
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 const Header: React.FC = () => {
   const router = useRouter()
-  const [session, loading] = useSession()
+  const [session] = useSession()
   const [navbarOpen, setNavbarOpen] = React.useState(false)
 
   let rightnav = (
     <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
       <Link href="/api/auth/signin" passHref>
-        <a className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+        <a
+          href
+          className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+        >
           Sign in
         </a>
       </Link>
@@ -29,6 +33,7 @@ const Header: React.FC = () => {
       <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
         {session.user.email}
         <a
+          href
           onClick={() => signOut()}
           className="ml-3 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
         >
@@ -44,14 +49,13 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <Link href="/">
-              <a href="#">
-                <span className="sr-only">Home</span>
+              <div>
                 <img
                   className="h-8 w-auto sm:h-10"
                   src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                   alt=""
                 />
-              </a>
+              </div>
             </Link>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
@@ -166,9 +170,7 @@ const Header: React.FC = () => {
 
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   {session ? session.user.email : ' '}
-                  <a className="text-indigo-600 hover:text-indigo-500">
-                    Sign in
-                  </a>
+                  <a className="text-indigo-600 hover:text-indigo-500">Sign in</a>
                 </p>
               </nav>
             </div>
