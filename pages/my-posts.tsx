@@ -92,30 +92,25 @@ const MyPosts: React.FC<Props> = (props) => {
 
   return (
     <Layout title="SWR Blogger | My Posts">
-      {loading ? '<h1>LOADING</h1>' : ''}
       <div className="mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12">
         {props.myposts.map((post) => (
           <div key={post.id} className="mx-12">
             <Post post={post} />
             <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-2">
               <button
-                className={
-                  'bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex" + ${ loading ? "disabled:opacity-50" : ""} '
-                }
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex ${loading ? ' disabled:opacity-50' : ''}`}                
                 onClick={() => {
                   setLoading(true)
-                  console.log(loading)
                   deletePost(post.id)
                 }}
-                disabled={loading ? true : false}
+                disabled={true}
               >
                 Delete
               </button>
               <button
-                className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex"
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex ${loading ? ' disabled:opacity-50' : ''}`}                
                 onClick={() => {
                   setLoading(true)
-                  console.log(loading)
                   publishPost(post.id)
                 }}
                 disabled={loading ? true : false}
@@ -123,10 +118,9 @@ const MyPosts: React.FC<Props> = (props) => {
                 Publish
               </button>
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex"
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex ${loading ? ' disabled:opacity-50' : ''}`}                
                 onClick={() => {
                   setLoading(true)
-                  console.log(loading)
                   unPublishPost(post.id)
                 }}
                 disabled={loading ? true : false}
