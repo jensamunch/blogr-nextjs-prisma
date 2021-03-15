@@ -37,22 +37,6 @@ type Props = {
 
 const MyPosts: React.FC<Props> = (props) => {
   const [loading, setLoading] = React.useState(false)
-  React.useEffect(() => {
-    const start = () => {
-      setLoading(true)
-    }
-    const end = () => {
-      setLoading(false)
-    }
-    Router.events.on('routeChangeStart', start)
-    Router.events.on('routeChangeComplete', end)
-    Router.events.on('routeChangeError', end)
-    return () => {
-      Router.events.off('routeChangeStart', start)
-      Router.events.off('routeChangeComplete', end)
-      Router.events.off('routeChangeError', end)
-    }
-  }, [])
 
   const [session] = useSession()
 
@@ -65,6 +49,7 @@ const MyPosts: React.FC<Props> = (props) => {
     } catch (error) {
       console.error(error)
     }
+    setLoading(false)
   }
 
   async function publishPost(id: number): Promise<void> {
@@ -76,7 +61,7 @@ const MyPosts: React.FC<Props> = (props) => {
     } catch (error) {
       console.error(error)
     }
-    console.log('refeshing after publish)')
+    setLoading(false)
   }
 
   async function unPublishPost(id: number): Promise<void> {
@@ -88,7 +73,7 @@ const MyPosts: React.FC<Props> = (props) => {
     } catch (error) {
       console.error(error)
     }
-    console.log('refeshing after publish)')
+    setLoading(false)
   }
 
   if (!session) {
@@ -111,33 +96,47 @@ const MyPosts: React.FC<Props> = (props) => {
         {props.myposts.map((post) => (
           <div key={post.id} className="mx-12">
             <Post post={post} />
-            <button
-              className="mt-5 mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex"
-              onClick={() => deletePost(post.id)}
-              disabled={loading ? true : false}
-            >
-              Delete
-            </button>
-            <button
-              className="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex"
-              onClick={() => publishPost(post.id)}
-              disabled={loading ? true : false}
-            >
-              Publish
-            </button>
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex"
-              onClick={() => unPublishPost(post.id)}
-              disabled={loading ? true : false}
-            >
-              Unpublish
-            </button>
+            <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-2">
+              <button
+                className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex"
+                onClick={() => {
+                  deletePost(post.id)
+                  setLoading(true)
+                }}
+                disabled={loading ? true : false}
+              >
+                Delete
+              </button>
+              <button
+                className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex"
+                onClick={() => {
+                  publishPost(post.id)
+                  setLoading(true)
+                }}
+                disabled={loading ? true : false}
+              >
+                Publish
+              </button>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded inline-flex"
+                onClick={() => {
+                  unPublishPost(post.id)
+                  setLoading(true)
+                }}
+                disabled={loading ? true : false}
+              >
+                Unpublish
+              </button>
+            </div>
           </div>
         ))}
       </div>
 
       {loading ? (
-        <div id="loading-screen" className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div
+          id="loading-screen"
+          className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center bg-gray-900 bg-opacity-50"
+        >
           <svg
             className=" animate-spin h-24 w-24 text-gray-500"
             xmlns="http://www.w3.org/2000/svg"
