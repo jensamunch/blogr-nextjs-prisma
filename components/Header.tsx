@@ -1,13 +1,8 @@
 // Header.tsx
 import React from 'react'
 import Link from 'next/link'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/client'
-import NProgress from 'nprogress'; //nprogress module
-import 'nprogress/nprogress.css'; //styles of nprogress
-
-//Binding events. 
-Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on('routeChangeComplete', () => NProgress.done()); Router.events.on('routeChangeError', () => NProgress.done());  
 
 const Header: React.FC = () => {
   const router = useRouter()
